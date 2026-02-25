@@ -337,6 +337,8 @@ def show_company_detail(row):
                     st.markdown(f"#### {titulo}")
                     st.caption(fecha_formateada)
                     st.markdown(texto_nota)
+                    st.divider()
+    st.divider()
 
     st.markdown("### Datos completos")
     
