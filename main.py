@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import re
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
-st.set_page_config(page_title="Portfolio Kanban", layout="wide")
+st.set_page_config(page_title="Portfolio Kanban", layout="wide", page_icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb_FaT4TLTs0RVC0zxBnYT2pUjrN3JJKIY6Q&s")
 
 # Configuración de IDs (Asegúrate de tener ATTIO_API_KEY en st.secrets)
 ATTIO_API_KEY = st.secrets["ATTIO_API_KEY"]
