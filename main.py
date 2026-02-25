@@ -353,8 +353,8 @@ def get_status_style(status):
     status = str(status).upper()
     styles = {
         "EXITED":     ("#E3F9E5", "#1F7A33"),
-        "WRITE-OFF":  ("#FEF3C7", "#92400E"),
-        "ACTIVO":     ("#FEE2E2", "#B91C1C"),
+        "ACTIVO":  ("#FEF3C7", "#92400E"),
+        "WRITE-OFF":     ("#FEE2E2", "#B91C1C"),
     }
     bg, fg = styles.get(status, ("#F3F4F6", "#374151"))
     return f"""
