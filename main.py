@@ -26,10 +26,10 @@ st.markdown(
     """
     <style>
     .st-emotion-cache-o29vc0 {
-        background-color: #F8F9FA;
+        background-color: #FFFFFF;
         padding: 1rem;
         border-radius: 12px;
-        border: 1px solid #EDEDED;
+        border: 2px solid #EDEDED;
         margin-bottom: 0.1rem;
     }
     </style>
@@ -41,7 +41,7 @@ st.markdown("""
 <style>
     /* Fondo general uniforme — gris claro */
     .stApp {
-        background-color: #e8eaed;
+        background-color: #F8F9FA;
     }
 
     /* Eliminar cualquier fondo extra en bloques verticales */
