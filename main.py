@@ -41,7 +41,7 @@ st.markdown("""
 <style>
     /* Fondo general uniforme — gris claro */
     .stApp {
-        background-color: #F8F9FA;
+        background-color: #FFFFFF;
     }
 
     /* Eliminar cualquier fondo extra en bloques verticales */
