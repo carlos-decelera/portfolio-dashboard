@@ -328,30 +328,15 @@ def show_company_detail(row):
     else:
         with st.container(height=400):
             for nota in notas:
+                titulo = nota.get("title", "Nota sin título").strip()
                 texto_nota = nota.get("content_markdown", "Nota sin texto")
                 fecha_iso = nota.get("created_at")
                 fecha_formateada = pd.to_datetime(fecha_iso).strftime("%d %b %Y, %H:%M")
 
-                st.markdown(
-                    f"""
-                    <div style="
-                        padding: 12px;
-                        border-radius: 8px;
-                        background-color: #fdfdfd;
-                        border: 1px solid #eee;
-                        border-left: 4px solid #4a90e2;
-                        margin-bottom: 10px;
-                    ">
-                        <p style="margin: 0; font-size: 0.8rem; color: #888; font-weight: bold;">
-                            {fecha_formateada}
-                        </p>
-                        <div style="margin-top: 5px; font-size: 0.9rem; color: #333; line-height: 1.5;">
-                            {texto_nota}
-                        </div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                with st.chat_message("note"):
+                    st.markdown(f"#### {titulo}")
+                    st.caption(fecha_formateada)
+                    st.markdown(texto_nota)
 
     st.markdown("### Datos completos")
     
