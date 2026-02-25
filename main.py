@@ -328,9 +328,9 @@ def show_company_detail(row):
     else:
         with st.container(height=400):
             for nota in notas:
-                texto_nota = nota.get("content_plain_text", "Nota sin texto")
+                texto_nota = nota.get("content_plaintext", "Nota sin texto")
                 fecha_iso = nota.get("created_at")
-                fecha_formateada = pd.to_datetime(fecha_iso).strftime("&d %b %Y, %H:%M")
+                fecha_formateada = pd.to_datetime(fecha_iso).strftime("%d %b %Y, %H:%M")
 
                 st.markdown(
                     f"""
