@@ -1,0 +1,6 @@
+streamlit
+pandas
+httpx
+re
+asyncio
+plotly
