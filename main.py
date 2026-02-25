@@ -203,6 +203,33 @@ def extract_value(attr_list):
         if val is not None: extracted.append(str(val))
     return "\n".join(extracted) if extracted else None
 
+async def obtener_notas_attio(record_id: str):
+
+    url = f"{BASE_URL}/notes"
+    
+    params = {
+        "parent_record_id": record_id,
+        "parent_object": "companies",
+        "limit": 50
+    }
+
+    try:
+        async with httpx.AsyncClient() as client:
+
+            response = await client.get(url, headers=HEADERS, params=params)
+            
+            response.raise_for_status()
+            
+            data = response.json()
+            return data.get("data", [])
+            
+    except httpx.HTTPStatusError as e:
+        st.error(f"Error de API Attio: {e.response.status_code}")
+        return []
+    except Exception as e:
+        st.error(f"Error inesperado: {e}")
+        return []
+
 async def fetch_data(client, url, payload=None):
     all_data, limit, offset = [], 100, 0
     while True:
@@ -289,6 +316,42 @@ def show_company_detail(row):
     with col_c:
         year = row.get("investment_year") or "N/A"
         st.markdown(estilo_dato_metrica.format(titulo="Año de inversión", valor=year), unsafe_allow_html=True)
+    
+    st.divider()
+
+    st.markdown("### Notas de llamadas")
+
+    notas = asyncio.run(obtener_notas_attio(row["record_id"]))
+
+    if not notas:
+        st.info("No hay notas registradas para esta compañía")
+    else:
+        with st.container(height=400):
+            for nota in notas:
+                texto_nota = nota.get("content_plain_text", "Nota sin texto")
+                fecha_iso = nota.get("created_at")
+                fecha_formateada = pd.to_datetime(fecha_iso).strfime("&d %b %Y")
+
+                st.markdown(
+                    f"""
+                    <div style="
+                        padding: 12px;
+                        border-radius: 8px;
+                        background-color: #fdfdfd;
+                        border: 1px solid #eee;
+                        border-left: 4px solid #4a90e2;
+                        margin-bottom: 10px;
+                    ">
+                        <p style="margin: 0; font-size: 0.8rem; color: #888; font-weight: bold;">
+                            {fecha_formateada}
+                        </p>
+                        <div style="margin-top: 5px; font-size: 0.9rem; color: #333; line-height: 1.5;">
+                            {texto_nota}
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
     st.markdown("### Datos completos")
     
@@ -398,7 +461,7 @@ def main():
         st.warning("No hay datos disponibles.")
         return
 
-    CATEGORIAS = ["Zombie", "Monitoring", "Good Performer", "Over Performer",  None]
+    CATEGORIAS = ["Over Performer", "Good Performer",  "Monitoring", "Zombie", None]
     cols = st.columns(len(CATEGORIAS))
 
     for i, cat in enumerate(CATEGORIAS):
