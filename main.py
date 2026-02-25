@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import re
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
-st.set_page_config(page_title="Portfolio dashboard", layout="wide")
+st.set_page_config(page_title="Portfolio Kanban", layout="wide")
 
 # Configuración de IDs (Asegúrate de tener ATTIO_API_KEY en st.secrets)
 ATTIO_API_KEY = st.secrets["ATTIO_API_KEY"]
@@ -376,7 +376,22 @@ def get_status_style(status):
 # INTERFAZ KANBAN
 # ────────────────────────────────────────────────────────────
 def main():
-    st.title("📊 Mi Portfolio Kanban")
+    #Configuracion del logo y titulo
+    logo_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb_FaT4TLTs0RVC0zxBnYT2pUjrN3JJKIY6Q&s"
+    titulo_texto = "Portfolio Decelera Ventures I"
+
+    st.markdown(
+        f"""
+        <div style="display: flex; align-items: center; margin-bottom: 20px;">
+            <img src="{logo_url}" style="width: 70px; height: 70px; margin-right: 15px;">
+            <h1 style="margin: 0; font-family: 'Inter', sans-serif; color: #31333F; font-size: 2.2rem;">
+                {titulo_texto}
+            </h1>
+        </div>
+    """,
+    unsafe_allow_html=True
+    )
+    st.divider()
 
     df = get_combined_dataframe()
     if df.empty:
