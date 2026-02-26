@@ -308,7 +308,7 @@ def main():
         st.warning("No hay datos disponibles.")
         return
 
-    CATEGORIAS = ["Over Performer", "Good Performer",  "Monitoring", "Zombie", None]
+    CATEGORIAS = ["Over Performer", "Good Performer",  "Monitoring", "Zombie", "Write-off", "Exited"]
     cols = st.columns(len(CATEGORIAS))
 
     for i, cat in enumerate(CATEGORIAS):
